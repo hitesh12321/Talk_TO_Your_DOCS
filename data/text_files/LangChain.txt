@@ -1,0 +1,26 @@
+LangChain Overview
+
+LangChain is an open-source framework for building applications powered
+by large language models (LLMs).
+
+Key Features
+
+-   Prompt templates
+-   Chains and pipelines
+-   Agents and tools
+-   Memory
+-   Retrieval-Augmented Generation (RAG)
+
+Common Use Cases
+
+-   Chatbots
+-   Question answering
+-   Document summarization
+-   Code assistants
+-   AI automation
+
+Benefits
+
+-   Modular architecture
+-   Easy integration with LLM providers
+-   Support for vector databases and external APIs

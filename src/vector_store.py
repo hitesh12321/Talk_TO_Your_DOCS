@@ -1,0 +1,32 @@
+from langchain_community.vectorstores import FAISS
+from src.local_embedding import LocalEmbedding
+
+class VectorStore:
+
+    def __init__(self):
+
+        self.embedding = LocalEmbedding().embedding_model
+        self.db = None
+
+    def create_index(self, documents):
+
+        self.db = FAISS.from_documents(
+            documents,
+            self.embedding
+        )
+
+    def save(self, path="./vector_db"):
+
+        self.db.save_local(path)
+
+    def load(self, path="./vector_db"):
+
+        self.db = FAISS.load_local(
+            path,
+            self.embedding,
+            allow_dangerous_deserialization=True
+        )
+
+    def search(self, query, k=4):
+
+        return self.db.similarity_search(query, k=k)
