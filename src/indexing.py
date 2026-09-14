@@ -2,15 +2,18 @@ from src.pdf_reader import PdfReader
 from src.textchunker import Chunker
 from src.vector_store import VectorStore
 
-def build_index():
+def build_index(pdf_path , source=None):
 
-    reader = PdfReader("./data/pdf_files/graph.pdf")
+    reader = PdfReader(pdf_path)
 
     text = reader.extract_text()
 
     chunker = Chunker()
 
-    docs = chunker.chunk_text(text)
+    docs = chunker.chunk_text(
+    text,
+    source=source
+)
 
     store = VectorStore()
 
@@ -18,7 +21,5 @@ def build_index():
 
     store.save()
 
-    print("Index Saved Successfully")
+    return store
 
-if __name__=="__main__":
-    build_index()

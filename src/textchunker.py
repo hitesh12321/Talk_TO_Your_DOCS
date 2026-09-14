@@ -16,7 +16,7 @@ class Chunker:
             separators=["\n\n", "\n", " ", ""]
         )
 
-    def chunk_text(self, text):
+    def chunk_text(self, text, source=None):
 
         chunks = self.splitter.split_text(text)
 
@@ -28,6 +28,7 @@ class Chunker:
                 Document(
                     page_content=chunk,
                     metadata={
+                        "source": source,
                         "chunk_id": i,
                         "chunk_size": len(chunk)
                     }

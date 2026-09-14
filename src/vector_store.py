@@ -1,5 +1,6 @@
 from langchain_community.vectorstores import FAISS
 from src.local_embedding import LocalEmbedding
+from langchain_community.vectorstores.utils import DistanceStrategy
 
 class VectorStore:
 
@@ -12,7 +13,8 @@ class VectorStore:
 
         self.db = FAISS.from_documents(
             documents,
-            self.embedding
+            self.embedding,
+            distance_strategy=DistanceStrategy.COSINE
         )
 
     def save(self, path="./vector_db"):
@@ -24,7 +26,8 @@ class VectorStore:
         self.db = FAISS.load_local(
             path,
             self.embedding,
-            allow_dangerous_deserialization=True
+            allow_dangerous_deserialization=True,
+            distance_strategy=DistanceStrategy.COSINE
         )
 
     def search(self, query, k=4):
